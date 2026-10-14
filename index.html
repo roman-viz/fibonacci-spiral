@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="uk" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="Laterware створює адаптивні сайти для бізнесу: від сайту-візитки до інтернет-магазину." />
+    <meta name="theme-color" content="#081a27" />
+    <link rel="icon" type="image/svg+xml" href="/laterware-mark.svg" />
+    <title>Laterware — сайти для бізнесу</title>
+    <script>
+      document.documentElement.dataset.theme =
+        localStorage.getItem("laterware-theme") || "dark";
+    </script>
+    <style>
+      #startup-loader {
+        --loader-paper: #070a0f;
+        --loader-ink: #f3f4f6;
+        --loader-accent: #2dd4bf;
+        position: fixed;
+        z-index: 9999;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background: var(--loader-paper);
+        color: var(--loader-ink);
+      }
+      :root[data-theme="light"] #startup-loader {
+        --loader-paper: #f3f6f5;
+        --loader-ink: #14272e;
+        --loader-accent: #087f83;
+      }
+      #startup-loader .loader {
+        position: relative;
+        display: block;
+        width: 48px;
+        height: 48px;
+        animation: loader-rotation 1s linear infinite;
+      }
+      #startup-loader .loader::before,
+      #startup-loader .loader::after {
+        position: absolute;
+        top: 0;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: var(--loader-ink);
+        content: "";
+        animation: loader-scale 1s infinite ease-in-out;
+      }
+      #startup-loader .loader::before {
+        top: auto;
+        bottom: 0;
+        background: var(--loader-accent);
+        animation-delay: .5s;
+      }
+      @keyframes loader-rotation {
+        to { transform: rotate(360deg); }
+      }
+      @keyframes loader-scale {
+        0%, 100% { transform: scale(0); }
+        50% { transform: scale(1); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #startup-loader .loader,
+        #startup-loader .loader::before,
+        #startup-loader .loader::after {
+          animation-duration: 2s;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="startup-loader" class="startup-loader" role="status" aria-live="polite" aria-label="Завантаження сайту">
+      <span class="loader" aria-hidden="true"></span>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
